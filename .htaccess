@@ -1,0 +1,11 @@
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteBase /local/roadmaps/
+
+    # Se o arquivo ou pasta física existir (como um .js ou .css), abre normal
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+
+    # Se não existir, manda para o view.php
+    RewriteRule ^([^/]+)$ view.php?path=$1 [L,QSA]
+</IfModule>

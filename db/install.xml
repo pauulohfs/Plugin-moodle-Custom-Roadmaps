@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<XMLDB PATH="local/roadmaps/db" VERSION="20260112" COMMENT="XMLDB file for Moodle local_roadmaps"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="../../../lib/xmldb/xmldb.xsd"
+>
+  <TABLES>
+    <TABLE NAME="local_roadmaps" COMMENT="Table to store custom roadmaps">
+      <FIELDS>
+        <FIELD NAME="id" TYPE="int" LENGTH="10" NOTNULL="true" SEQUENCE="true"/>
+        <FIELD NAME="name" TYPE="char" LENGTH="255" NOTNULL="true" COMMENT="Title of the page"/>
+        <FIELD NAME="slug" TYPE="char" LENGTH="100" NOTNULL="true" COMMENT="Friendly URL slug"/>
+        <FIELD NAME="content" TYPE="text" NOTNULL="true" COMMENT="HTML/JS/CSS content"/>
+        <FIELD NAME="contentformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" COMMENT="Format of the content"/>
+        <FIELD NAME="accesslevel" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" COMMENT="0: Public, 1: Logged in, 2: Enrolled in course"/>
+        <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+        <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
+      </FIELDS>
+      <KEYS>
+        <KEY NAME="primary" TYPE="primary" FIELDS="id"/>
+      </KEYS>
+      <INDEXES>
+        <INDEX NAME="slug_idx" UNIQUE="true" FIELDS="slug"/>
+      </INDEXES>
+    </TABLE>
+  </TABLES>
+</XMLDB>
