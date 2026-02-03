@@ -3,7 +3,7 @@
  * Delete script for Custom Roadmaps.
  *
  * @package    local_roadmaps
- * @copyright  2026 Manus
+ * @copyright  2026 Paulo
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
