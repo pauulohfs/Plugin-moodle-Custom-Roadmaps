@@ -39,11 +39,17 @@ class edit_form extends \moodleform {
         $options = [
             0 => get_string('access_public', 'local_roadmaps'),
             1 => get_string('access_logged_in', 'local_roadmaps'),
-            2 => get_string('access_enrolled', 'local_roadmaps'),
+            //2 => get_string('access_enrolled', 'local_roadmaps'),
         ];
         $mform->addElement('select', 'accesslevel', get_string('access_level', 'local_roadmaps'), $options);
         $mform->setType('accesslevel', PARAM_INT);
         $mform->setDefault('accesslevel', 0);
+
+        // Course Linker
+        $mform->addElement('header', 'linking', get_string('linking_header', 'local_roadmaps'));
+        $mform->addElement('course', 'courseid', get_string('link_to_course', 'local_roadmaps'));
+        $mform->setType('courseid', PARAM_INT);
+        $mform->addHelpButton('courseid', 'link_to_course', 'local_roadmaps');
 
         // Content (Code Editor)
         $mform->addElement('textarea', 'content', get_string('roadmap_content', 'local_roadmaps'), ['rows' => 20, 'cols' => 80, 'style' => 'font-family: monospace;']);
@@ -68,6 +74,19 @@ class edit_form extends \moodleform {
 
         if ($DB->record_exists_select('local_roadmaps', $sql, $params)) {
             $errors['slug'] = get_string('slug_exists', 'local_roadmaps');
+        }
+
+        // Check if course is already linked to another roadmap.
+        if (!empty($data['courseid'])) {
+            $sql = "courseid = :courseid";
+            $params = ['courseid' => $data['courseid']];
+            if (!empty($data['id'])) {
+                $sql .= " AND id <> :id";
+                $params['id'] = $data['id'];
+            }
+            if ($DB->record_exists_select('local_roadmaps', $sql, $params)) {
+                $errors['courseid'] = get_string('course_already_linked', 'local_roadmaps');
+            }
         }
 
         return $errors;

@@ -12,6 +12,7 @@
         <FIELD NAME="content" TYPE="text" NOTNULL="true" COMMENT="HTML/JS/CSS content"/>
         <FIELD NAME="contentformat" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="1" COMMENT="Format of the content"/>
         <FIELD NAME="accesslevel" TYPE="int" LENGTH="4" NOTNULL="true" DEFAULT="0" COMMENT="0: Public, 1: Logged in, 2: Enrolled in course"/>
+        <FIELD NAME="courseid" TYPE="int" LENGTH="10" NOTNULL="false" DEFAULT="0" COMMENT="Linked course ID"/>
         <FIELD NAME="timecreated" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
         <FIELD NAME="timemodified" TYPE="int" LENGTH="10" NOTNULL="true" DEFAULT="0"/>
       </FIELDS>

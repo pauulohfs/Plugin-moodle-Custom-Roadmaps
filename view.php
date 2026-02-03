@@ -32,7 +32,7 @@ switch ($roadmap->accesslevel) {
 }
 
 // Configurações da página.
-$PAGE->set_url(new moodle_url('/local/roadmaps/view.php', ['path' => $slug]));
+$PAGE->set_url(new moodle_url('/local/roadmaps/' . $roadmap->slug));
 $PAGE->set_context($context);
 $PAGE->set_title(format_string($roadmap->name));
 

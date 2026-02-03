@@ -30,3 +30,9 @@ $string['access_denied'] = 'You do not have permission to view this page.';
 $string['slug_exists'] = 'This slug is already in use. Please choose another one.';
 $string['save_success'] = 'Roadmap saved successfully.';
 $string['delete_success'] = 'Roadmap deleted successfully.';
+
+$string['linking_header'] = 'Course Linking';
+$string['link_to_course'] = 'Link to Course';
+$string['link_to_course_help'] = 'Select a course to automatically add the roadmap button to its description.';
+$string['course_already_linked'] = 'This course is already linked to another roadmap.';
+$string['link_success'] = 'Roadmap linked and course description updated.';
