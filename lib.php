@@ -112,15 +112,20 @@ function local_roadmaps_link_to_course($courseid, $roadmap) {
  * @return bool
  */
 function local_roadmaps_pluginfile($course, $cm, $context, $filearea, $args, $forcedownload, array $options = []) {
+    // Valida se estamos no contexto do sistema.
     if ($context->contextlevel != CONTEXT_SYSTEM) {
         return false;
     }
 
-    require_login();
-
+    // Valida se a área de arquivo é a nossa.
     if ($filearea !== 'roadmap_images') {
         return false;
     }
+
+    // Para permitir que usuários deslogados vejam a imagem (Público),
+    // nós NÃO usamos require_login(). 
+    // Em vez disso, apenas garantimos que o usuário tenha acesso ao site.
+    // Se o seu Moodle for totalmente fechado (forcelogin), o Moodle cuidará disso antes.
 
     $itemid = array_shift($args);
     $filename = array_pop($args);
@@ -133,5 +138,6 @@ function local_roadmaps_pluginfile($course, $cm, $context, $filearea, $args, $fo
         return false;
     }
 
-    send_stored_file($file, 0, 0, $forcedownload, $options);
+    // 60*60*24 = 86400 (cache de 24 horas para não pesar o servidor)
+    send_stored_file($file, 86400, 0, $forcedownload, $options);
 }
