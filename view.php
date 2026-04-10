@@ -9,7 +9,17 @@
 
 require_once(__DIR__ . '/../../config.php');
 
-$slug = required_param('path', PARAM_ALPHANUMEXT);
+// We try to get the slug from the 'path' parameter (standard Moodle way)
+// or from the URL path if URL rewriting is active.
+$slug = optional_param('path', '', PARAM_ALPHANUMEXT);
+
+if (empty($slug)) {
+    // Fallback for URL rewriting: try to get it from the request URI if path is empty.
+    $parts = explode('/', $_SERVER['REQUEST_URI']);
+    $slug = end($parts);
+    // Clean the slug just in case.
+    $slug = clean_param($slug, PARAM_ALPHANUMEXT);
+}
 
 // Busca o roadmap no banco de dados.
 $roadmap = $DB->get_record('local_roadmaps', ['slug' => $slug]);
@@ -32,7 +42,7 @@ switch ($roadmap->accesslevel) {
 }
 
 // Configurações da página.
-$PAGE->set_url(new moodle_url('/local/roadmaps/' . $roadmap->slug));
+$PAGE->set_url(new moodle_url('/local/roadmaps/view.php', ['path' => $roadmap->slug]));
 $PAGE->set_context($context);
 $PAGE->set_title(format_string($roadmap->name));
 

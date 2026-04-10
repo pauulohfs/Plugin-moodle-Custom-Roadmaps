@@ -16,8 +16,11 @@ admin_externalpage_setup('local_roadmaps_manage');
 
 echo $OUTPUT->header();
 
-// Botão para criar novo Roadmap.
-echo $OUTPUT->single_button(new moodle_url('/local/roadmaps/edit.php'), get_string('create_roadmap', 'local_roadmaps'), 'get', ['class' => 'mb-3']);
+// Botões de ação.
+echo '<div class="mb-3 d-flex gap-2">';
+echo $OUTPUT->single_button(new moodle_url('/local/roadmaps/edit.php'), get_string('create_roadmap', 'local_roadmaps'), 'get');
+echo $OUTPUT->single_button(new moodle_url('/local/roadmaps/images.php'), get_string('image_manager', 'local_roadmaps'), 'get', ['class' => 'btn-secondary']);
+echo '</div>';
 
 // Definição da tabela.
 $table = new flexible_table('local_roadmaps_list');
